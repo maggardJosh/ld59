@@ -16,6 +16,7 @@ rotation = -1.5707964
 script = ExtResource("1_uoj53")
 light_collision_mask = 16
 carTextures = Array[Texture2D]([ExtResource("2_06lh1"), ExtResource("3_td361"), ExtResource("2_k61xc")])
+minCarSpeed = 100.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=2125234151]
 path_desired_distance = 5.0

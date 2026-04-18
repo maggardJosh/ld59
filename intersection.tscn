@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pm2pbydohmg5" path="res://intersection.gd" id="1_ga7jf"]
 [ext_resource type="SpriteFrames" uid="uid://be2b38w4moay2" path="res://stoplight.aseprite" id="1_p2d6a"]
+[ext_resource type="Script" uid="uid://b5dwtrkbh31h7" path="res://stoplightParent.gd" id="2_0mcfx"]
 [ext_resource type="Script" uid="uid://csbdbfoon057" path="res://stoplight.gd" id="3_0mcfx"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kek77"]
@@ -20,7 +21,10 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(4, 6, -18, 6, -18, 30, 4, 30)])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qrk37"]
-size = Vector2(12, 23.000002)
+size = Vector2(12, 12.500001)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0mcfx"]
+size = Vector2(12, 10.500001)
 
 [node name="Intersection" type="Node2D" unique_id=1371543747 node_paths=PackedStringArray("top_light", "right_light", "bottom_light", "left_light")]
 script = ExtResource("1_ga7jf")
@@ -253,6 +257,7 @@ end_position = Vector2(5, -10.000001)
 
 [node name="Light" type="Node2D" parent="." unique_id=835479889]
 rotation = -1.5707964
+script = ExtResource("2_0mcfx")
 
 [node name="rightLight" type="AnimatedSprite2D" parent="Light" unique_id=1762509038]
 position = Vector2(7.999999, 11)
@@ -263,12 +268,21 @@ script = ExtResource("3_0mcfx")
 
 [node name="Area2D2" type="Area2D" parent="Light/rightLight" unique_id=2066160222]
 position = Vector2(9.536743e-07, 3.5762787e-07)
-collision_layer = 16
+collision_layer = 32768
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Light/rightLight/Area2D2" unique_id=872403630]
-position = Vector2(-9.536743e-07, -5.000001)
+position = Vector2(-1.3709266e-06, -9.536743e-07)
 shape = SubResource("RectangleShape2D_qrk37")
+
+[node name="CarCollision2" type="Area2D" parent="Light/rightLight" unique_id=1361873807]
+position = Vector2(-9.536743e-07, 0.99999905)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Light/rightLight/CarCollision2" unique_id=2142321226]
+position = Vector2(-4.7683716e-07, -13.25)
+shape = SubResource("RectangleShape2D_0mcfx")
 
 [node name="bottomLight" type="AnimatedSprite2D" parent="Light" unique_id=2137331860]
 position = Vector2(-8.999999, 7.999999)
@@ -278,12 +292,20 @@ frame = 1
 script = ExtResource("3_0mcfx")
 
 [node name="Area2D" type="Area2D" parent="Light/bottomLight" unique_id=1415243500]
-collision_layer = 16
+collision_layer = 32768
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Light/bottomLight/Area2D" unique_id=2107150412]
-position = Vector2(2.5433155e-07, -7.000001)
+position = Vector2(0, -1.750001)
 shape = SubResource("RectangleShape2D_qrk37")
+
+[node name="CarCollision" type="Area2D" parent="Light/bottomLight" unique_id=828441232]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Light/bottomLight/CarCollision" unique_id=842523386]
+position = Vector2(-4.7683716e-07, -13.25)
+shape = SubResource("RectangleShape2D_0mcfx")
 
 [node name="topLight" type="AnimatedSprite2D" parent="Light" unique_id=1688371107]
 position = Vector2(9, -7.9999995)
@@ -293,12 +315,19 @@ frame = 1
 script = ExtResource("3_0mcfx")
 
 [node name="Area2D" type="Area2D" parent="Light/topLight" unique_id=1282586116]
-collision_layer = 16
+collision_layer = 32768
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Light/topLight/Area2D" unique_id=750828958]
-position = Vector2(0, -6.499999)
 shape = SubResource("RectangleShape2D_qrk37")
+
+[node name="CarCollision3" type="Area2D" parent="Light/topLight" unique_id=1478934235]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Light/topLight/CarCollision3" unique_id=1986319000]
+position = Vector2(-4.7683716e-07, -13.25)
+shape = SubResource("RectangleShape2D_0mcfx")
 
 [node name="leftLight" type="AnimatedSprite2D" parent="Light" unique_id=1562530098 node_paths=PackedStringArray("navArea")]
 position = Vector2(-7.9999995, -9)
@@ -308,12 +337,21 @@ script = ExtResource("3_0mcfx")
 navArea = NodePath("../../Navigation/EntranceLeft/NavigationRegion2D10")
 
 [node name="Area2D" type="Area2D" parent="Light/leftLight" unique_id=508752653]
-collision_layer = 16
+collision_layer = 32768
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Light/leftLight/Area2D" unique_id=1776540531]
-position = Vector2(-9.535951e-08, -6)
+position = Vector2(-3.576278e-07, 0)
 shape = SubResource("RectangleShape2D_qrk37")
+
+[node name="CarCollision4" type="Area2D" parent="Light/leftLight" unique_id=943565870]
+position = Vector2(-8.337286e-14, 1)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Light/leftLight/CarCollision4" unique_id=1532908285]
+position = Vector2(-4.7683716e-07, -13.25)
+shape = SubResource("RectangleShape2D_0mcfx")
 
 [connection signal="input_event" from="Light/rightLight/Area2D2" to="Light/rightLight" method="_on_area_2d_input_event"]
 [connection signal="input_event" from="Light/bottomLight/Area2D" to="Light/bottomLight" method="_on_area_2d_input_event"]

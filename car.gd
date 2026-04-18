@@ -51,20 +51,19 @@ func _physics_process(delta: float) -> void:
 			var res = get_world_2d().direct_space_state.intersect_point(pp, 1)
 			if(res):
 				next_light = res[0].collider.get_parent()
+			else:
+				next_light = null
 
 		last_nav_pos = nextPos
 
 	if next_light:
 		next_light_enabled = next_light.lightEnabled
-
-
-	if stopped_at_light and not next_light_enabled:
-		speed *= .8
+	if (stopped_at_light and not next_light_enabled) or car_ahead_of_us:
+		speed = 0
 		return
-	if car_ahead_of_us:
-		speed *= .8
-		return
-	stopped_at_light = false
+	if stopped_at_light:
+		next_light = null
+		stopped_at_light = false
 
 	var dirTo = global_position.direction_to(nextPos)
 	look_at(nextPos)
