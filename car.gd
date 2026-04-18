@@ -1,12 +1,13 @@
 class_name Car
 extends Node2D
 
-@export var speed:float = 100
 @onready var navAgent = $NavigationAgent2D
 @export_flags_2d_physics var light_collision_mask: int
 @export var type: int = 0
 
 @export var carTextures: Array[Texture2D]
+@export var minCarSpeed: float = 50
+@export var maxCarSpeed: float = 150
 
 @onready var sprite = $Sprite2D
 var next_light_enabled = true
@@ -14,9 +15,12 @@ var stopped_at_light = false
 var next_light: Stoplight
 
 var car_ahead_of_us = false
-
+var speed: float = 100
+var max_speed: float = 100
+var acc: float = 1.0
 func _ready() -> void:
 	sprite.texture = carTextures[type]
+	max_speed = randf_range(minCarSpeed, maxCarSpeed)
 
 func random_type() -> void:
 	type = randi() % carTextures.size()
@@ -55,13 +59,16 @@ func _physics_process(delta: float) -> void:
 
 
 	if stopped_at_light and not next_light_enabled:
+		speed *= .8
 		return
 	if car_ahead_of_us:
+		speed *= .8
 		return
 	stopped_at_light = false
 
 	var dirTo = global_position.direction_to(nextPos)
 	look_at(nextPos)
+	speed = lerp(speed, max_speed, acc * delta)
 	self.global_position += dirTo * speed * delta
 
 
