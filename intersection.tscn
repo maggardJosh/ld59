@@ -1,13 +1,28 @@
 [gd_scene format=3 uid="uid://bxqnmvueh7drv"]
 
+[ext_resource type="Script" uid="uid://pm2pbydohmg5" path="res://intersection.gd" id="1_ga7jf"]
 [ext_resource type="SpriteFrames" uid="uid://be2b38w4moay2" path="res://stoplight.aseprite" id="1_p2d6a"]
+[ext_resource type="Script" uid="uid://csbdbfoon057" path="res://stoplight.gd" id="3_0mcfx"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kek77"]
-vertices = PackedVector2Array(-3.3203125, 18.679688, -12, 19.28125, -12, 9.640625, -3.640625, 9.34375)
+vertices = PackedVector2Array(-6, 20, -8, 20, -8, 10, -6, 10)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(6, -1, -22, 0, -22, 30, 7, 28)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(4, 0, -18, 0, -18, 30, 4, 30)])
 
-[node name="Intersection" type="Node2D" unique_id=1371543747]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ga7jf"]
+vertices = PackedVector2Array(-5, 14, -7, 14, -7, 12, -5, 12)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(4.9999995, 1.999999, -17, 2, -17, 24, 5.0000005, 24)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qrk37"]
+size = Vector2(12, 23.000002)
+
+[node name="Intersection" type="Node2D" unique_id=1371543747 node_paths=PackedStringArray("top_light", "right_light", "bottom_light", "left_light")]
+script = ExtResource("1_ga7jf")
+top_light = NodePath("Light/topLight")
+right_light = NodePath("Light/rightLight")
+bottom_light = NodePath("Light/bottomLight")
+left_light = NodePath("Light/leftLight")
 
 [node name="Navigation" type="Node2D" parent="." unique_id=330763979]
 
@@ -16,31 +31,35 @@ position = Vector2(16, 7)
 navigation_polygon = SubResource("NavigationPolygon_kek77")
 
 [node name="NavigationRegion2D6" type="NavigationRegion2D" parent="Navigation" unique_id=758722090]
-position = Vector2(16, -37)
+position = Vector2(16, -36)
 navigation_polygon = SubResource("NavigationPolygon_kek77")
 
 [node name="NavigationRegion2D7" type="NavigationRegion2D" parent="Navigation" unique_id=190560574]
-position = Vector2(30, -7)
-navigation_polygon = SubResource("NavigationPolygon_kek77")
+position = Vector2(15, 8)
+rotation = 1.5707964
+navigation_polygon = SubResource("NavigationPolygon_ga7jf")
 
 [node name="NavigationRegion2D8" type="NavigationRegion2D" parent="Navigation" unique_id=1885066186]
 position = Vector2(-1, -37)
 navigation_polygon = SubResource("NavigationPolygon_kek77")
 
 [node name="NavigationRegion2D9" type="NavigationRegion2D" parent="Navigation" unique_id=748757458]
-position = Vector2(-1, 7)
+position = Vector2(-1, 6)
 navigation_polygon = SubResource("NavigationPolygon_kek77")
 
 [node name="NavigationRegion2D10" type="NavigationRegion2D" parent="Navigation" unique_id=1742089468]
-position = Vector2(-14, -6)
+position = Vector2(-6, 15)
+rotation = 1.5707964
 navigation_polygon = SubResource("NavigationPolygon_kek77")
 
 [node name="NavigationRegion2D11" type="NavigationRegion2D" parent="Navigation" unique_id=448879221]
-position = Vector2(-12, -23)
+position = Vector2(-5, -1)
+rotation = 1.5707964
 navigation_polygon = SubResource("NavigationPolygon_kek77")
 
 [node name="NavigationRegion2D12" type="NavigationRegion2D" parent="Navigation" unique_id=646235945]
-position = Vector2(31, -23)
+position = Vector2(37, -1)
+rotation = 1.5707964
 navigation_polygon = SubResource("NavigationPolygon_kek77")
 
 [node name="NavigationLink2D2" type="NavigationLink2D" parent="Navigation" unique_id=1562380105]
@@ -105,7 +124,7 @@ end_position = Vector2(11, -13)
 position = Vector2(-21, 8)
 rotation = 1.5707964
 bidirectional = false
-end_position = Vector2(-31, -30)
+end_position = Vector2(-6.000001, -23)
 
 [node name="NavigationLink2D12" type="NavigationLink2D" parent="Navigation" unique_id=428703141]
 position = Vector2(-21, 7)
@@ -121,26 +140,85 @@ bidirectional = false
 start_position = Vector2(1, 0)
 end_position = Vector2(14, -13)
 
+[node name="NavigationLink2D14" type="NavigationLink2D" parent="Navigation" unique_id=1839709340]
+position = Vector2(2, 2)
+rotation = 1.5707964
+bidirectional = false
+end_position = Vector2(-25, -6.999999)
+
+[node name="NavigationRegion2D13" type="NavigationRegion2D" parent="Navigation" unique_id=721733584]
+position = Vector2(36, 15)
+rotation = 1.5707964
+navigation_polygon = SubResource("NavigationPolygon_kek77")
+
 [node name="Light" type="Node2D" parent="." unique_id=835479889]
 rotation = -1.5707964
 
-[node name="Stoplight3" type="AnimatedSprite2D" parent="Light" unique_id=2095894996]
-position = Vector2(-8, -13)
-sprite_frames = ExtResource("1_p2d6a")
-
-[node name="Stoplight5" type="AnimatedSprite2D" parent="Light" unique_id=805350006]
-position = Vector2(13, -8)
-rotation = 1.5707964
-sprite_frames = ExtResource("1_p2d6a")
-frame = 1
-
-[node name="Stoplight6" type="AnimatedSprite2D" parent="Light" unique_id=1762509038]
-position = Vector2(8, 13)
+[node name="rightLight" type="AnimatedSprite2D" parent="Light" unique_id=1762509038 node_paths=PackedStringArray("navArea")]
+position = Vector2(7.999999, 11)
 rotation = -3.1415925
 sprite_frames = ExtResource("1_p2d6a")
+frame = 1
+script = ExtResource("3_0mcfx")
+navArea = NodePath("../../Navigation/NavigationRegion2D12")
 
-[node name="Stoplight7" type="AnimatedSprite2D" parent="Light" unique_id=2137331860]
-position = Vector2(-13, 8)
+[node name="Area2D2" type="Area2D" parent="Light/rightLight" unique_id=2066160222]
+position = Vector2(9.536743e-07, 3.5762787e-07)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Light/rightLight/Area2D2" unique_id=872403630]
+position = Vector2(-9.536743e-07, -5.000001)
+shape = SubResource("RectangleShape2D_qrk37")
+
+[node name="bottomLight" type="AnimatedSprite2D" parent="Light" unique_id=2137331860 node_paths=PackedStringArray("navArea")]
+position = Vector2(-8.999999, 7.999999)
 rotation = -1.5707964
 sprite_frames = ExtResource("1_p2d6a")
 frame = 1
+script = ExtResource("3_0mcfx")
+navArea = NodePath("../../Navigation/NavigationRegion2D5")
+
+[node name="Area2D" type="Area2D" parent="Light/bottomLight" unique_id=1415243500]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Light/bottomLight/Area2D" unique_id=2107150412]
+position = Vector2(2.5433155e-07, -7.000001)
+shape = SubResource("RectangleShape2D_qrk37")
+
+[node name="topLight" type="AnimatedSprite2D" parent="Light" unique_id=1688371107 node_paths=PackedStringArray("navArea")]
+position = Vector2(9, -7.9999995)
+rotation = 1.5707964
+sprite_frames = ExtResource("1_p2d6a")
+frame = 1
+script = ExtResource("3_0mcfx")
+navArea = NodePath("../../Navigation/NavigationRegion2D8")
+
+[node name="Area2D" type="Area2D" parent="Light/topLight" unique_id=1282586116]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Light/topLight/Area2D" unique_id=750828958]
+position = Vector2(0, -6.499999)
+shape = SubResource("RectangleShape2D_qrk37")
+
+[node name="leftLight" type="AnimatedSprite2D" parent="Light" unique_id=1562530098 node_paths=PackedStringArray("navArea")]
+position = Vector2(-7.9999995, -9)
+sprite_frames = ExtResource("1_p2d6a")
+frame = 1
+script = ExtResource("3_0mcfx")
+navArea = NodePath("../../Navigation/NavigationRegion2D10")
+
+[node name="Area2D" type="Area2D" parent="Light/leftLight" unique_id=508752653]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Light/leftLight/Area2D" unique_id=1776540531]
+position = Vector2(-9.535951e-08, -6)
+shape = SubResource("RectangleShape2D_qrk37")
+
+[connection signal="input_event" from="Light/rightLight/Area2D2" to="Light/rightLight" method="_on_area_2d_input_event"]
+[connection signal="input_event" from="Light/bottomLight/Area2D" to="Light/bottomLight" method="_on_area_2d_input_event"]
+[connection signal="input_event" from="Light/topLight/Area2D" to="Light/topLight" method="_on_area_2d_input_event"]
+[connection signal="input_event" from="Light/leftLight/Area2D" to="Light/leftLight" method="_on_area_2d_input_event"]

@@ -25,6 +25,11 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
 
+[layer_names]
+
+2d_physics/layer_5="lights"
+2d_physics/layer_9="cars"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
