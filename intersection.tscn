@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://bxqnmvueh7drv"]
+
+[ext_resource type="SpriteFrames" uid="uid://be2b38w4moay2" path="res://stoplight.aseprite" id="1_p2d6a"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_kek77"]
+vertices = PackedVector2Array(-3.3203125, 18.679688, -12, 19.28125, -12, 9.640625, -3.640625, 9.34375)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(6, -1, -22, 0, -22, 30, 7, 28)])
+
+[node name="Intersection" type="Node2D" unique_id=1371543747]
+
+[node name="Navigation" type="Node2D" parent="." unique_id=330763979]
+
+[node name="NavigationRegion2D5" type="NavigationRegion2D" parent="Navigation" unique_id=311069755]
+position = Vector2(16, 7)
+navigation_polygon = SubResource("NavigationPolygon_kek77")
+
+[node name="NavigationRegion2D6" type="NavigationRegion2D" parent="Navigation" unique_id=758722090]
+position = Vector2(16, -37)
+navigation_polygon = SubResource("NavigationPolygon_kek77")
+
+[node name="NavigationRegion2D7" type="NavigationRegion2D" parent="Navigation" unique_id=190560574]
+position = Vector2(30, -7)
+navigation_polygon = SubResource("NavigationPolygon_kek77")
+
+[node name="NavigationRegion2D8" type="NavigationRegion2D" parent="Navigation" unique_id=1885066186]
+position = Vector2(-1, -37)
+navigation_polygon = SubResource("NavigationPolygon_kek77")
+
+[node name="NavigationRegion2D9" type="NavigationRegion2D" parent="Navigation" unique_id=748757458]
+position = Vector2(-1, 7)
+navigation_polygon = SubResource("NavigationPolygon_kek77")
+
+[node name="NavigationRegion2D10" type="NavigationRegion2D" parent="Navigation" unique_id=1742089468]
+position = Vector2(-14, -6)
+navigation_polygon = SubResource("NavigationPolygon_kek77")
+
+[node name="NavigationRegion2D11" type="NavigationRegion2D" parent="Navigation" unique_id=448879221]
+position = Vector2(-12, -23)
+navigation_polygon = SubResource("NavigationPolygon_kek77")
+
+[node name="NavigationRegion2D12" type="NavigationRegion2D" parent="Navigation" unique_id=646235945]
+position = Vector2(31, -23)
+navigation_polygon = SubResource("NavigationPolygon_kek77")
+
+[node name="NavigationLink2D2" type="NavigationLink2D" parent="Navigation" unique_id=1562380105]
+position = Vector2(9, 19)
+bidirectional = false
+start_position = Vector2(0, 2)
+end_position = Vector2(-28, -27)
+
+[node name="NavigationLink2D3" type="NavigationLink2D" parent="Navigation" unique_id=1362641963]
+position = Vector2(9, 19)
+bidirectional = false
+start_position = Vector2(0, 2)
+end_position = Vector2(0, -42)
+
+[node name="NavigationLink2D4" type="NavigationLink2D" parent="Navigation" unique_id=1416587538]
+position = Vector2(9, 19)
+bidirectional = false
+start_position = Vector2(0, 2)
+end_position = Vector2(14, -11)
+
+[node name="NavigationLink2D5" type="NavigationLink2D" parent="Navigation" unique_id=611876731]
+position = Vector2(23, -9)
+rotation = -1.5707964
+bidirectional = false
+start_position = Vector2(-1, 0)
+end_position = Vector2(-30, -31)
+
+[node name="NavigationLink2D6" type="NavigationLink2D" parent="Navigation" unique_id=1003837506]
+position = Vector2(23, -9)
+rotation = -1.5707964
+bidirectional = false
+start_position = Vector2(-1, 0)
+end_position = Vector2(-1, -42)
+
+[node name="NavigationLink2D7" type="NavigationLink2D" parent="Navigation" unique_id=1708486917]
+position = Vector2(23, -8)
+rotation = -1.5707964
+bidirectional = false
+end_position = Vector2(15, -14)
+
+[node name="NavigationLink2D8" type="NavigationLink2D" parent="Navigation" unique_id=1222920692]
+position = Vector2(-8, -22)
+rotation = 3.1415927
+bidirectional = false
+start_position = Vector2(0, -1)
+end_position = Vector2(-31, -29.999996)
+
+[node name="NavigationLink2D9" type="NavigationLink2D" parent="Navigation" unique_id=867213691]
+position = Vector2(-8, -22)
+rotation = 3.1415927
+bidirectional = false
+start_position = Vector2(0, -1)
+end_position = Vector2(0, -42.999996)
+
+[node name="NavigationLink2D10" type="NavigationLink2D" parent="Navigation" unique_id=263571378]
+position = Vector2(-8, -21)
+rotation = 3.1415927
+bidirectional = false
+end_position = Vector2(11, -13)
+
+[node name="NavigationLink2D11" type="NavigationLink2D" parent="Navigation" unique_id=1914717466]
+position = Vector2(-21, 8)
+rotation = 1.5707964
+bidirectional = false
+end_position = Vector2(-31, -30)
+
+[node name="NavigationLink2D12" type="NavigationLink2D" parent="Navigation" unique_id=428703141]
+position = Vector2(-21, 7)
+rotation = 1.5707964
+bidirectional = false
+start_position = Vector2(1, 0)
+end_position = Vector2(1, -44)
+
+[node name="NavigationLink2D13" type="NavigationLink2D" parent="Navigation" unique_id=1676732557]
+position = Vector2(-21, 7)
+rotation = 1.5707964
+bidirectional = false
+start_position = Vector2(1, 0)
+end_position = Vector2(14, -13)
+
+[node name="Light" type="Node2D" parent="." unique_id=835479889]
+rotation = -1.5707964
+
+[node name="Stoplight3" type="AnimatedSprite2D" parent="Light" unique_id=2095894996]
+position = Vector2(-8, -13)
+sprite_frames = ExtResource("1_p2d6a")
+
+[node name="Stoplight5" type="AnimatedSprite2D" parent="Light" unique_id=805350006]
+position = Vector2(13, -8)
+rotation = 1.5707964
+sprite_frames = ExtResource("1_p2d6a")
+frame = 1
+
+[node name="Stoplight6" type="AnimatedSprite2D" parent="Light" unique_id=1762509038]
+position = Vector2(8, 13)
+rotation = -3.1415925
+sprite_frames = ExtResource("1_p2d6a")
+
+[node name="Stoplight7" type="AnimatedSprite2D" parent="Light" unique_id=2137331860]
+position = Vector2(-13, 8)
+rotation = -1.5707964
+sprite_frames = ExtResource("1_p2d6a")
+frame = 1
