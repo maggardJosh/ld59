@@ -31,6 +31,7 @@ func _physics_process(delta: float) -> void:
 	if NavigationServer2D.map_get_iteration_id(navAgent.get_navigation_map()) == 0:
 		return
 	if navAgent.is_navigation_finished():
+		self.queue_free()
 		return
 
 	var nextPos = navAgent.get_next_path_position()
@@ -71,3 +72,7 @@ func _on_area_2d_2_area_shape_entered(area_rid: RID, area: Area2D, area_shape_in
 
 func _on_area_2d_2_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	car_ahead_of_us = false
+
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.button_index == 2 and event.is_pressed():
+		queue_free()

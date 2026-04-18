@@ -13,7 +13,7 @@ func update_light_enabled_status() -> void:
 
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.is_pressed():
+	if event is InputEventMouseButton and event.button_index == 1 and event.is_pressed():
 		lightEnabled = not lightEnabled
 		update_light_enabled_status()
 

@@ -5,14 +5,19 @@
 [ext_resource type="Script" uid="uid://csbdbfoon057" path="res://stoplight.gd" id="3_0mcfx"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kek77"]
-vertices = PackedVector2Array(-6, 20, -8, 20, -8, 10, -6, 10)
+vertices = PackedVector2Array(-6, 20, -8, 20, -8, 15, -6, 15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(4, 0, -18, 0, -18, 30, 4, 30)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(4.000002, 5, -17.999998, 5, -18, 30, 4, 30)])
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ga7jf"]
 vertices = PackedVector2Array(-5, 14, -7, 14, -7, 12, -5, 12)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(4.9999995, 1.999999, -17, 2, -17, 24, 5.0000005, 24)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_0mcfx"]
+vertices = PackedVector2Array(-6, 20, -8, 20, -8, 16, -6, 16)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(4, 6, -18, 6, -18, 30, 4, 30)])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qrk37"]
 size = Vector2(12, 23.000002)
@@ -26,141 +31,235 @@ left_light = NodePath("Light/leftLight")
 
 [node name="Navigation" type="Node2D" parent="." unique_id=330763979]
 
-[node name="NavigationRegion2D5" type="NavigationRegion2D" parent="Navigation" unique_id=311069755]
-position = Vector2(16, 7)
-navigation_polygon = SubResource("NavigationPolygon_kek77")
+[node name="EntranceLeft" type="Node2D" parent="Navigation" unique_id=1461612072]
 
-[node name="NavigationRegion2D6" type="NavigationRegion2D" parent="Navigation" unique_id=758722090]
-position = Vector2(16, -36)
-navigation_polygon = SubResource("NavigationPolygon_kek77")
-
-[node name="NavigationRegion2D7" type="NavigationRegion2D" parent="Navigation" unique_id=190560574]
-position = Vector2(15, 8)
-rotation = 1.5707964
-navigation_polygon = SubResource("NavigationPolygon_ga7jf")
-
-[node name="NavigationRegion2D8" type="NavigationRegion2D" parent="Navigation" unique_id=1885066186]
-position = Vector2(-1, -37)
-navigation_polygon = SubResource("NavigationPolygon_kek77")
-
-[node name="NavigationRegion2D9" type="NavigationRegion2D" parent="Navigation" unique_id=748757458]
-position = Vector2(-1, 6)
-navigation_polygon = SubResource("NavigationPolygon_kek77")
-
-[node name="NavigationRegion2D10" type="NavigationRegion2D" parent="Navigation" unique_id=1742089468]
-position = Vector2(-6, 15)
-rotation = 1.5707964
-navigation_polygon = SubResource("NavigationPolygon_kek77")
-
-[node name="NavigationRegion2D11" type="NavigationRegion2D" parent="Navigation" unique_id=448879221]
-position = Vector2(-5, -1)
-rotation = 1.5707964
-navigation_polygon = SubResource("NavigationPolygon_kek77")
-
-[node name="NavigationRegion2D12" type="NavigationRegion2D" parent="Navigation" unique_id=646235945]
-position = Vector2(37, -1)
-rotation = 1.5707964
-navigation_polygon = SubResource("NavigationPolygon_kek77")
-
-[node name="NavigationLink2D2" type="NavigationLink2D" parent="Navigation" unique_id=1562380105]
-position = Vector2(9, 19)
-bidirectional = false
-start_position = Vector2(0, 2)
-end_position = Vector2(-28, -27)
-
-[node name="NavigationLink2D3" type="NavigationLink2D" parent="Navigation" unique_id=1362641963]
-position = Vector2(9, 19)
-bidirectional = false
-start_position = Vector2(0, 2)
-end_position = Vector2(0, -42)
-
-[node name="NavigationLink2D4" type="NavigationLink2D" parent="Navigation" unique_id=1416587538]
-position = Vector2(9, 19)
-bidirectional = false
-start_position = Vector2(0, 2)
-end_position = Vector2(14, -11)
-
-[node name="NavigationLink2D5" type="NavigationLink2D" parent="Navigation" unique_id=611876731]
-position = Vector2(23, -9)
-rotation = -1.5707964
-bidirectional = false
-start_position = Vector2(-1, 0)
-end_position = Vector2(-30, -31)
-
-[node name="NavigationLink2D6" type="NavigationLink2D" parent="Navigation" unique_id=1003837506]
-position = Vector2(23, -9)
-rotation = -1.5707964
-bidirectional = false
-start_position = Vector2(-1, 0)
-end_position = Vector2(-1, -42)
-
-[node name="NavigationLink2D7" type="NavigationLink2D" parent="Navigation" unique_id=1708486917]
-position = Vector2(23, -8)
-rotation = -1.5707964
-bidirectional = false
-end_position = Vector2(15, -14)
-
-[node name="NavigationLink2D8" type="NavigationLink2D" parent="Navigation" unique_id=1222920692]
-position = Vector2(-8, -22)
-rotation = 3.1415927
-bidirectional = false
-start_position = Vector2(0, -1)
-end_position = Vector2(-31, -29.999996)
-
-[node name="NavigationLink2D9" type="NavigationLink2D" parent="Navigation" unique_id=867213691]
-position = Vector2(-8, -22)
-rotation = 3.1415927
-bidirectional = false
-start_position = Vector2(0, -1)
-end_position = Vector2(0, -42.999996)
-
-[node name="NavigationLink2D10" type="NavigationLink2D" parent="Navigation" unique_id=263571378]
-position = Vector2(-8, -21)
-rotation = 3.1415927
-bidirectional = false
-end_position = Vector2(11, -13)
-
-[node name="NavigationLink2D11" type="NavigationLink2D" parent="Navigation" unique_id=1914717466]
-position = Vector2(-21, 8)
-rotation = 1.5707964
-bidirectional = false
-end_position = Vector2(-6.000001, -23)
-
-[node name="NavigationLink2D12" type="NavigationLink2D" parent="Navigation" unique_id=428703141]
-position = Vector2(-21, 7)
-rotation = 1.5707964
-bidirectional = false
-start_position = Vector2(1, 0)
-end_position = Vector2(1, -44)
-
-[node name="NavigationLink2D13" type="NavigationLink2D" parent="Navigation" unique_id=1676732557]
-position = Vector2(-21, 7)
-rotation = 1.5707964
-bidirectional = false
-start_position = Vector2(1, 0)
-end_position = Vector2(14, -13)
-
-[node name="NavigationLink2D14" type="NavigationLink2D" parent="Navigation" unique_id=1839709340]
+[node name="NavigationLink2D14" type="NavigationLink2D" parent="Navigation/EntranceLeft" unique_id=1839709340]
 position = Vector2(2, 2)
 rotation = 1.5707964
 bidirectional = false
-end_position = Vector2(-25, -6.999999)
+start_position = Vector2(-1.1920929e-07, -4)
+end_position = Vector2(-21, -5.999999)
 
-[node name="NavigationRegion2D13" type="NavigationRegion2D" parent="Navigation" unique_id=721733584]
-position = Vector2(36, 15)
+[node name="NavigationLink2D13" type="NavigationLink2D" parent="Navigation/EntranceLeft" unique_id=1676732557]
+position = Vector2(-21, 7)
+rotation = 1.5707964
+bidirectional = false
+start_position = Vector2(5, -10.000001)
+end_position = Vector2(11.999999, -13.000001)
+
+[node name="NavigationLink2D12" type="NavigationLink2D" parent="Navigation/EntranceLeft" unique_id=428703141]
+position = Vector2(-21, 7)
+rotation = 1.5707964
+bidirectional = false
+start_position = Vector2(1, 0)
+end_position = Vector2(0.9999981, -40)
+
+[node name="NavigationLink2D11" type="NavigationLink2D" parent="Navigation/EntranceLeft" unique_id=1914717466]
+position = Vector2(-21, 8)
+rotation = 1.5707964
+bidirectional = false
+end_position = Vector2(-6.000001, -27)
+
+[node name="NavigationRegion2D10" type="NavigationRegion2D" parent="Navigation/EntranceLeft" unique_id=1742089468]
+position = Vector2(-5, 15)
 rotation = 1.5707964
 navigation_polygon = SubResource("NavigationPolygon_kek77")
+
+[node name="NavigationRegion2D7" type="NavigationRegion2D" parent="Navigation/EntranceLeft" unique_id=190560574]
+position = Vector2(19, 8)
+rotation = 1.5707964
+navigation_polygon = SubResource("NavigationPolygon_ga7jf")
+
+[node name="NavigationRegion2D8" type="NavigationRegion2D" parent="Navigation/EntranceLeft" unique_id=1312120908]
+position = Vector2(2, 18)
+rotation = 1.5707964
+navigation_polygon = SubResource("NavigationPolygon_ga7jf")
+
+[node name="NavigationLink2D15" type="NavigationLink2D" parent="Navigation/EntranceLeft" unique_id=1777889585]
+position = Vector2(-21, 8)
+rotation = 1.5707964
+bidirectional = false
+end_position = Vector2(4, -10.000001)
+
+[node name="NavigationRegion2D11" type="NavigationRegion2D" parent="Navigation/EntranceLeft" unique_id=1766651044]
+position = Vector2(37, 15)
+rotation = 1.5707964
+navigation_polygon = SubResource("NavigationPolygon_0mcfx")
+
+[node name="NavigationRegion2D13" type="NavigationRegion2D" parent="Navigation/EntranceLeft" unique_id=717838042]
+position = Vector2(15, -37)
+navigation_polygon = SubResource("NavigationPolygon_kek77")
+
+[node name="EntranceLeft2" type="Node2D" parent="Navigation" unique_id=1754749339]
+rotation = -1.5707964
+
+[node name="NavigationLink2D14" type="NavigationLink2D" parent="Navigation/EntranceLeft2" unique_id=402536510]
+position = Vector2(2, 2)
+rotation = 1.5707964
+bidirectional = false
+start_position = Vector2(-1.1920929e-07, -4)
+end_position = Vector2(-22, -7)
+
+[node name="NavigationLink2D13" type="NavigationLink2D" parent="Navigation/EntranceLeft2" unique_id=477590647]
+position = Vector2(-21, 7)
+rotation = 1.5707964
+bidirectional = false
+start_position = Vector2(5.999999, -10)
+end_position = Vector2(11.999999, -13)
+
+[node name="NavigationLink2D12" type="NavigationLink2D" parent="Navigation/EntranceLeft2" unique_id=1630767670]
+position = Vector2(-21, 7)
+rotation = 1.5707964
+bidirectional = false
+start_position = Vector2(0.99999905, 0)
+end_position = Vector2(0.99999905, -40)
+
+[node name="NavigationLink2D11" type="NavigationLink2D" parent="Navigation/EntranceLeft2" unique_id=1339189239]
+position = Vector2(-21, 8)
+rotation = 1.5707964
+bidirectional = false
+end_position = Vector2(-6.000001, -27)
+
+[node name="NavigationRegion2D10" type="NavigationRegion2D" parent="Navigation/EntranceLeft2" unique_id=1467912785]
+position = Vector2(-5.0000005, 15)
+rotation = 1.5707964
+navigation_polygon = SubResource("NavigationPolygon_kek77")
+
+[node name="NavigationRegion2D7" type="NavigationRegion2D" parent="Navigation/EntranceLeft2" unique_id=1255171332]
+position = Vector2(19, 8)
+rotation = 1.5707964
+navigation_polygon = SubResource("NavigationPolygon_ga7jf")
+
+[node name="NavigationRegion2D8" type="NavigationRegion2D" parent="Navigation/EntranceLeft2" unique_id=932310688]
+position = Vector2(1.999999, 19)
+rotation = 1.5707964
+navigation_polygon = SubResource("NavigationPolygon_ga7jf")
+
+[node name="NavigationLink2D15" type="NavigationLink2D" parent="Navigation/EntranceLeft2" unique_id=347930093]
+position = Vector2(-21, 8)
+rotation = 1.5707964
+bidirectional = false
+end_position = Vector2(4.999999, -10)
+
+[node name="NavigationRegion2D13" type="NavigationRegion2D" parent="Navigation/EntranceLeft2" unique_id=1820325813]
+position = Vector2(16, -37)
+navigation_polygon = SubResource("NavigationPolygon_kek77")
+
+[node name="EntranceLeft3" type="Node2D" parent="Navigation" unique_id=1916506061]
+rotation = -3.1415927
+
+[node name="NavigationLink2D14" type="NavigationLink2D" parent="Navigation/EntranceLeft3" unique_id=1726172988]
+position = Vector2(2, 2)
+rotation = 1.5707964
+bidirectional = false
+start_position = Vector2(-1.1920929e-07, -4)
+end_position = Vector2(-21, -6.000001)
+
+[node name="NavigationLink2D13" type="NavigationLink2D" parent="Navigation/EntranceLeft3" unique_id=663121143]
+position = Vector2(-21, 7)
+rotation = 1.5707964
+bidirectional = false
+start_position = Vector2(5.999998, -9.999999)
+end_position = Vector2(11.999999, -12.999999)
+
+[node name="NavigationLink2D12" type="NavigationLink2D" parent="Navigation/EntranceLeft3" unique_id=1019621615]
+position = Vector2(-21, 7)
+rotation = 1.5707964
+bidirectional = false
+start_position = Vector2(1, 0)
+end_position = Vector2(2, -41)
+
+[node name="NavigationLink2D11" type="NavigationLink2D" parent="Navigation/EntranceLeft3" unique_id=1369775599]
+position = Vector2(-21, 8)
+rotation = 1.5707964
+bidirectional = false
+end_position = Vector2(-6.000001, -27)
+
+[node name="NavigationRegion2D10" type="NavigationRegion2D" parent="Navigation/EntranceLeft3" unique_id=1360837745]
+position = Vector2(-4.000002, 14.999998)
+rotation = 1.5707964
+navigation_polygon = SubResource("NavigationPolygon_kek77")
+
+[node name="NavigationRegion2D7" type="NavigationRegion2D" parent="Navigation/EntranceLeft3" unique_id=1431293261]
+position = Vector2(19, 8)
+rotation = 1.5707964
+navigation_polygon = SubResource("NavigationPolygon_ga7jf")
+
+[node name="NavigationRegion2D8" type="NavigationRegion2D" parent="Navigation/EntranceLeft3" unique_id=635793793]
+position = Vector2(1.9999988, 19)
+rotation = 1.5707964
+navigation_polygon = SubResource("NavigationPolygon_ga7jf")
+
+[node name="NavigationLink2D15" type="NavigationLink2D" parent="Navigation/EntranceLeft3" unique_id=1462041858]
+position = Vector2(-21, 8)
+rotation = 1.5707964
+bidirectional = false
+end_position = Vector2(4.999998, -9.999999)
+
+[node name="NavigationRegion2D13" type="NavigationRegion2D" parent="Navigation/EntranceLeft3" unique_id=1688329659]
+position = Vector2(15.000003, -37)
+navigation_polygon = SubResource("NavigationPolygon_kek77")
+
+[node name="EntranceLeft4" type="Node2D" parent="Navigation" unique_id=1845315225]
+rotation = 1.5707964
+
+[node name="NavigationLink2D14" type="NavigationLink2D" parent="Navigation/EntranceLeft4" unique_id=953138817]
+position = Vector2(2, 2)
+rotation = 1.5707964
+bidirectional = false
+start_position = Vector2(-1.1920929e-07, -4)
+end_position = Vector2(-21, -5.9999986)
+
+[node name="NavigationLink2D13" type="NavigationLink2D" parent="Navigation/EntranceLeft4" unique_id=1581250642]
+position = Vector2(-21, 7)
+rotation = 1.5707964
+bidirectional = false
+start_position = Vector2(6, -10.000001)
+end_position = Vector2(12.999999, -12.000002)
+
+[node name="NavigationLink2D12" type="NavigationLink2D" parent="Navigation/EntranceLeft4" unique_id=1396560623]
+position = Vector2(-21, 7)
+rotation = 1.5707964
+bidirectional = false
+start_position = Vector2(1, 0)
+end_position = Vector2(0.9999976, -40)
+
+[node name="NavigationLink2D11" type="NavigationLink2D" parent="Navigation/EntranceLeft4" unique_id=1587284806]
+position = Vector2(-21, 8)
+rotation = 1.5707964
+bidirectional = false
+end_position = Vector2(-6.000001, -27)
+
+[node name="NavigationRegion2D10" type="NavigationRegion2D" parent="Navigation/EntranceLeft4" unique_id=1009089858]
+position = Vector2(-5, 14.999999)
+rotation = 1.5707964
+navigation_polygon = SubResource("NavigationPolygon_kek77")
+
+[node name="NavigationRegion2D7" type="NavigationRegion2D" parent="Navigation/EntranceLeft4" unique_id=290993136]
+position = Vector2(19, 8)
+rotation = 1.5707964
+navigation_polygon = SubResource("NavigationPolygon_ga7jf")
+
+[node name="NavigationRegion2D8" type="NavigationRegion2D" parent="Navigation/EntranceLeft4" unique_id=2094935735]
+position = Vector2(2.000001, 19)
+rotation = 1.5707964
+navigation_polygon = SubResource("NavigationPolygon_ga7jf")
+
+[node name="NavigationLink2D15" type="NavigationLink2D" parent="Navigation/EntranceLeft4" unique_id=1896621379]
+position = Vector2(-21, 8)
+rotation = 1.5707964
+bidirectional = false
+end_position = Vector2(5, -10.000001)
 
 [node name="Light" type="Node2D" parent="." unique_id=835479889]
 rotation = -1.5707964
 
-[node name="rightLight" type="AnimatedSprite2D" parent="Light" unique_id=1762509038 node_paths=PackedStringArray("navArea")]
+[node name="rightLight" type="AnimatedSprite2D" parent="Light" unique_id=1762509038]
 position = Vector2(7.999999, 11)
 rotation = -3.1415925
 sprite_frames = ExtResource("1_p2d6a")
 frame = 1
 script = ExtResource("3_0mcfx")
-navArea = NodePath("../../Navigation/NavigationRegion2D12")
 
 [node name="Area2D2" type="Area2D" parent="Light/rightLight" unique_id=2066160222]
 position = Vector2(9.536743e-07, 3.5762787e-07)
@@ -171,13 +270,12 @@ collision_mask = 0
 position = Vector2(-9.536743e-07, -5.000001)
 shape = SubResource("RectangleShape2D_qrk37")
 
-[node name="bottomLight" type="AnimatedSprite2D" parent="Light" unique_id=2137331860 node_paths=PackedStringArray("navArea")]
+[node name="bottomLight" type="AnimatedSprite2D" parent="Light" unique_id=2137331860]
 position = Vector2(-8.999999, 7.999999)
 rotation = -1.5707964
 sprite_frames = ExtResource("1_p2d6a")
 frame = 1
 script = ExtResource("3_0mcfx")
-navArea = NodePath("../../Navigation/NavigationRegion2D5")
 
 [node name="Area2D" type="Area2D" parent="Light/bottomLight" unique_id=1415243500]
 collision_layer = 16
@@ -187,13 +285,12 @@ collision_mask = 0
 position = Vector2(2.5433155e-07, -7.000001)
 shape = SubResource("RectangleShape2D_qrk37")
 
-[node name="topLight" type="AnimatedSprite2D" parent="Light" unique_id=1688371107 node_paths=PackedStringArray("navArea")]
+[node name="topLight" type="AnimatedSprite2D" parent="Light" unique_id=1688371107]
 position = Vector2(9, -7.9999995)
 rotation = 1.5707964
 sprite_frames = ExtResource("1_p2d6a")
 frame = 1
 script = ExtResource("3_0mcfx")
-navArea = NodePath("../../Navigation/NavigationRegion2D8")
 
 [node name="Area2D" type="Area2D" parent="Light/topLight" unique_id=1282586116]
 collision_layer = 16
@@ -208,7 +305,7 @@ position = Vector2(-7.9999995, -9)
 sprite_frames = ExtResource("1_p2d6a")
 frame = 1
 script = ExtResource("3_0mcfx")
-navArea = NodePath("../../Navigation/NavigationRegion2D10")
+navArea = NodePath("../../Navigation/EntranceLeft/NavigationRegion2D10")
 
 [node name="Area2D" type="Area2D" parent="Light/leftLight" unique_id=508752653]
 collision_layer = 16
