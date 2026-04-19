@@ -4,10 +4,14 @@
 [ext_resource type="Script" uid="uid://n2oylete2h1y" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dif7q4hig8rja" path="res://car.tscn" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://urnh1ntjhipq" path="res://ui.gd" id="2_kek77"]
+[ext_resource type="AudioStream" uid="uid://d1oliwqocu1ym" path="res://GridlockLD59.wav" id="3_4c57u"]
 [ext_resource type="Script" uid="uid://kg33x0s6njhw" path="res://car_manager.gd" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://bpovp6nulmujx" path="res://blip_player.tscn" id="3_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://b42oep22nadst" path="res://garage_under.png" id="6_5vw27"]
 [ext_resource type="PackedScene" uid="uid://bxqnmvueh7drv" path="res://intersection.tscn" id="6_7mycd"]
+[ext_resource type="AudioStream" uid="uid://bsb2q5yeiqmbw" path="res://audio/Score.wav" id="6_dg77c"]
 [ext_resource type="Texture2D" uid="uid://bkxuwcxj1547n" path="res://garage_arrow.png" id="7_kek77"]
+[ext_resource type="Script" uid="uid://bxkwt6mt1ny1b" path="res://audioplayerhelper.gd" id="7_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://b35qy0gk0deor" path="res://garage_over.png" id="8_4c57u"]
 
 [sub_resource type="Animation" id="Animation_kek77"]
@@ -173,10 +177,13 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(26, 14, 2, 7, 6, 43, 33
 position = Vector2(59, 9)
 script = ExtResource("1_1bvp3")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=2110764479]
+[node name="UI" type="CanvasLayer" parent="." unique_id=2110764479 node_paths=PackedStringArray("musicPlayer", "blipPlayer")]
 script = ExtResource("2_kek77")
+musicPlayer = NodePath("../AudioStreamPlayer")
+blipPlayer = NodePath("Pause/VBoxContainer/Continue/BlipPlayer")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=678584713]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -264,9 +271,13 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Standard Mode"
 
+[node name="BlipPlayer" parent="UI/GameOver/VBoxContainer/Standard" unique_id=1480200427 instance=ExtResource("3_ycdy4")]
+
 [node name="Free" type="Button" parent="UI/GameOver/VBoxContainer" unique_id=302600242]
 layout_mode = 2
 text = "Free Mode"
+
+[node name="BlipPlayer" parent="UI/GameOver/VBoxContainer/Free" unique_id=1909764661 instance=ExtResource("3_ycdy4")]
 
 [node name="Title" type="PanelContainer" parent="UI" unique_id=875642968]
 anchors_preset = 15
@@ -292,9 +303,84 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Standard Mode"
 
+[node name="BlipPlayer" parent="UI/Title/VBoxContainer/Standard" unique_id=2025469655 instance=ExtResource("3_ycdy4")]
+
 [node name="Free" type="Button" parent="UI/Title/VBoxContainer" unique_id=1944707286]
 layout_mode = 2
 text = "Free Mode"
+
+[node name="BlipPlayer" parent="UI/Title/VBoxContainer/Free" unique_id=1570451444 instance=ExtResource("3_ycdy4")]
+
+[node name="Pause" type="PanelContainer" parent="UI" unique_id=1396777448]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Pause" unique_id=1555514513]
+custom_minimum_size = Vector2(300, 3.235)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="UI/Pause/VBoxContainer" unique_id=1687935150]
+custom_minimum_size = Vector2(0, 67.04)
+layout_mode = 2
+text = "Paused"
+label_settings = SubResource("LabelSettings_kek77")
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="UI/Pause/VBoxContainer" unique_id=1334558768]
+layout_mode = 2
+text = "Continue"
+
+[node name="BlipPlayer" parent="UI/Pause/VBoxContainer/Continue" unique_id=459410278 instance=ExtResource("3_ycdy4")]
+
+[node name="Quit" type="Button" parent="UI/Pause/VBoxContainer" unique_id=1076206156]
+layout_mode = 2
+text = "Quit to Title"
+
+[node name="BlipPlayer" parent="UI/Pause/VBoxContainer/Quit" unique_id=1435510964 instance=ExtResource("3_ycdy4")]
+
+[node name="ConstantControls" type="MarginContainer" parent="UI" unique_id=1498460825]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/ConstantControls" unique_id=1860294889]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+alignment = 2
+
+[node name="Music" type="Button" parent="UI/ConstantControls/HBoxContainer" unique_id=1827258777]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Music On"
+
+[node name="BlipPlayer" parent="UI/ConstantControls/HBoxContainer/Music" unique_id=937514107 instance=ExtResource("3_ycdy4")]
+
+[node name="SFX" type="Button" parent="UI/ConstantControls/HBoxContainer" unique_id=276449733]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Sound On"
+
+[node name="BlipPlayer" parent="UI/ConstantControls/HBoxContainer/SFX" unique_id=1691712049 instance=ExtResource("3_ycdy4")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1469146929]
+stream = ExtResource("3_4c57u")
+autoplay = true
+bus = &"Music"
 
 [node name="CarManager" type="Node2D" parent="." unique_id=1353484398 node_paths=PackedStringArray("carSpawnerNodeParent", "goals")]
 script = ExtResource("3_lquwl")
@@ -307,6 +393,13 @@ hardMaxCarSpawnTime = 0.6
 difficultyCurveTime = 180.0
 difficultyCurve = SubResource("Curve_kek77")
 carCollisionMask = 256
+
+[node name="Score" type="AudioStreamPlayer2D" parent="CarManager" unique_id=1354413634]
+stream = ExtResource("6_dg77c")
+volume_db = -4.2
+bus = &"Sfx"
+script = ExtResource("7_ycdy4")
+random_pitch_range = Vector2(0.9, 1.1)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1986926080]
 texture_filter = 1
@@ -738,3 +831,7 @@ texture = ExtResource("8_4c57u")
 [connection signal="pressed" from="UI/GameOver/VBoxContainer/Free" to="UI" method="_on_free_pressed"]
 [connection signal="pressed" from="UI/Title/VBoxContainer/Standard" to="UI" method="_on_standard_pressed"]
 [connection signal="pressed" from="UI/Title/VBoxContainer/Free" to="UI" method="_on_free_pressed"]
+[connection signal="pressed" from="UI/Pause/VBoxContainer/Continue" to="UI" method="_on_continue_pressed"]
+[connection signal="pressed" from="UI/Pause/VBoxContainer/Quit" to="UI" method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/ConstantControls/HBoxContainer/Music" to="UI" method="_on_music_pressed"]
+[connection signal="pressed" from="UI/ConstantControls/HBoxContainer/SFX" to="UI" method="_on_sfx_pressed"]

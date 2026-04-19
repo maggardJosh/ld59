@@ -43,7 +43,8 @@ func _on_game_started() -> void:
 	elapsed_time = 0
 	lives_left = standard_lives
 	EventManager.lives_updated.emit(lives_left)
-	EventManager.score_updated.emit(0)
+	score = 0
+	EventManager.score_updated.emit(score)
 	for car in cars:
 		car.queue_free()
 		
@@ -68,6 +69,7 @@ func _process(delta: float) -> void:
 var score: int = 0
 func on_car_reached_goal() -> void:
 	score+=100
+	$Score.play_random_pitch()
 	EventManager.score_updated.emit(score)
 
 func on_car_exploded() -> void:

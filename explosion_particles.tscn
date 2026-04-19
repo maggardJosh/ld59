@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://coy1st8vmoyqt"]
 
 [ext_resource type="Script" uid="uid://bku5mvkwjsrvx" path="res://explosion_particles.gd" id="1_regki"]
+[ext_resource type="AudioStream" uid="uid://caqjx1s1ne78x" path="res://audio/Explosion41.wav" id="2_xhyia"]
+[ext_resource type="Script" uid="uid://bxkwt6mt1ny1b" path="res://audioplayerhelper.gd" id="3_im78l"]
 
 [sub_resource type="Curve" id="Curve_tr7be"]
 _data = [Vector2(0, 0.6754001), 0.0, 2.1949525, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -34,3 +36,9 @@ scale_amount_curve = SubResource("Curve_tr7be")
 color = Color(0.83, 0.7553, 0.6806, 1)
 color_ramp = SubResource("Gradient_regki")
 script = ExtResource("1_regki")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1257255375]
+stream = ExtResource("2_xhyia")
+autoplay = true
+bus = &"Sfx"
+script = ExtResource("3_im78l")

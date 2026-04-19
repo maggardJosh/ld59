@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bpovp6nulmujx"]
+
+[ext_resource type="AudioStream" uid="uid://cufjawd446l5t" path="res://audio/Blip_Select63.wav" id="1_u5y4q"]
+[ext_resource type="Script" uid="uid://dnwu0lk244m46" path="res://blip_player.gd" id="2_u5y4q"]
+
+[node name="BlipPlayer" type="AudioStreamPlayer2D" unique_id=1480200427]
+stream = ExtResource("1_u5y4q")
+bus = &"Sfx"
+script = ExtResource("2_u5y4q")
+random_pitch_range = Vector2(0.9, 1.1)

@@ -4,6 +4,8 @@
 [ext_resource type="SpriteFrames" uid="uid://be2b38w4moay2" path="res://stoplight.aseprite" id="1_p2d6a"]
 [ext_resource type="Script" uid="uid://b5dwtrkbh31h7" path="res://stoplightParent.gd" id="2_0mcfx"]
 [ext_resource type="Script" uid="uid://csbdbfoon057" path="res://stoplight.gd" id="3_0mcfx"]
+[ext_resource type="AudioStream" uid="uid://dsj1i4d43guk6" path="res://audio/lightBlip.wav" id="5_xauj5"]
+[ext_resource type="Script" uid="uid://bxkwt6mt1ny1b" path="res://audioplayerhelper.gd" id="6_tx3dh"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kek77"]
 vertices = PackedVector2Array(-6, 20, -8, 20, -8, 15, -6, 15)
@@ -352,6 +354,19 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Light/leftLight/CarCollision4" unique_id=1532908285]
 position = Vector2(-4.7683716e-07, -13.25)
 shape = SubResource("RectangleShape2D_0mcfx")
+
+[node name="lightsfx" type="AudioStreamPlayer2D" parent="Light" unique_id=1252997733]
+stream = ExtResource("5_xauj5")
+volume_db = 1.5
+bus = &"Sfx"
+script = ExtResource("6_tx3dh")
+random_pitch_range = Vector2(0.9, 1.1)
+
+[node name="lightsfx2" type="AudioStreamPlayer2D" parent="Light" unique_id=1154485305]
+stream = ExtResource("5_xauj5")
+bus = &"Sfx"
+script = ExtResource("6_tx3dh")
+random_pitch_range = Vector2(0.7, 0.8)
 
 [connection signal="input_event" from="Light/rightLight/Area2D2" to="Light/rightLight" method="_on_area_2d_input_event"]
 [connection signal="input_event" from="Light/bottomLight/Area2D" to="Light/bottomLight" method="_on_area_2d_input_event"]
