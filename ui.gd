@@ -2,6 +2,7 @@ extends CanvasLayer
 @export var musicPlayer: AudioStreamPlayer
 @export var blipPlayer: AudioStreamPlayer2D
 func _ready():
+	visible = true
 	EventManager.score_updated.connect(score)
 	EventManager.lives_updated.connect(lives_updated)
 	EventManager.free_mode.connect(_on_free_mode_changed)

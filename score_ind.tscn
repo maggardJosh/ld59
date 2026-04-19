@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://b64ce8cj6jb3t"]
 
 [ext_resource type="Script" uid="uid://5r6htxt05owi" path="res://score_ind.gd" id="1_143fq"]
+[ext_resource type="Theme" uid="uid://cramhpxmqjpm1" path="res://basic_theme.tres" id="1_ayi4w"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ycdy4"]
-font_size = 12
+font_size = 8
 
 [sub_resource type="Animation" id="Animation_w48qg"]
 length = 0.001
@@ -79,6 +80,7 @@ offset_right = 145.0
 offset_bottom = 129.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ayi4w")
 script = ExtResource("1_143fq")
 
 [node name="Label" type="Label" parent="." unique_id=1251767741]
@@ -87,7 +89,7 @@ z_index = 1
 layout_mode = 1
 offset_left = -17.0
 offset_top = -8.0
-offset_right = 11.0
+offset_right = 31.0
 offset_bottom = 9.0
 text = "+100"
 label_settings = SubResource("LabelSettings_ycdy4")
