@@ -37,6 +37,7 @@ func set_goal(new_goal: Node2D) -> void:
 var last_nav_pos: Vector2
 
 func explode() -> void:
+	EventManager.car_exploded.emit()
 	var explosion = explosionScene.instantiate()
 	get_tree().root.add_child(explosion)
 	explosion.global_position = self.global_position
@@ -64,6 +65,7 @@ func _physics_process(delta: float) -> void:
 	if NavigationServer2D.map_get_iteration_id(navAgent.get_navigation_map()) == 0:
 		return
 	if navAgent.is_navigation_finished():
+		EventManager.car_reached_goal.emit()
 		self.queue_free()
 		return
 

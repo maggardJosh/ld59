@@ -3,6 +3,7 @@
 [ext_resource type="TileSet" uid="uid://02iospyjpxoy" path="res://tileset.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://n2oylete2h1y" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dif7q4hig8rja" path="res://car.tscn" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://urnh1ntjhipq" path="res://ui.gd" id="2_kek77"]
 [ext_resource type="Script" uid="uid://kg33x0s6njhw" path="res://car_manager.gd" id="3_lquwl"]
 [ext_resource type="Texture2D" uid="uid://b42oep22nadst" path="res://garage_under.png" id="6_5vw27"]
 [ext_resource type="PackedScene" uid="uid://bxqnmvueh7drv" path="res://intersection.tscn" id="6_7mycd"]
@@ -24,6 +25,11 @@ vertices = PackedVector2Array(25.648438, 17.742188, 27.25, 40.75, 5.1875, 40.242
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(35, 8, -1, 7, -6, 50, 38, 51)])
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_4c57u"]
+vertices = PackedVector2Array(14.65625, 36, 12, 36, 12, 28.203125, 15.2109375, 27.929688)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(26, 17, 2, 19, 2, 46, 24, 46)])
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kek77"]
 vertices = PackedVector2Array(39.5, 19.90625, -88.75, 19.09375, -83.82031, 5.53125, 32.726563, -2.46875)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -37,6 +43,39 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(26, 14, 2, 7, 6, 43, 33
 [node name="Main" type="Node2D" unique_id=508634319]
 position = Vector2(59, 9)
 script = ExtResource("1_1bvp3")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=2110764479]
+script = ExtResource("2_kek77")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=678584713]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Time" type="Label" parent="UI/MarginContainer" unique_id=679040943]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Time:"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=1159187877]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="Deaths" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=735355571]
+layout_mode = 2
+text = "Lives - "
+
+[node name="Score" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=2013743834]
+layout_mode = 2
+text = "Score - "
 
 [node name="CarManager" type="Node2D" parent="." unique_id=1353484398 node_paths=PackedStringArray("carSpawnerNodeParent", "goals")]
 script = ExtResource("3_lquwl")
@@ -165,7 +204,7 @@ end_position = Vector2(1, -130)
 position = Vector2(55, 72)
 bidirectional = false
 start_position = Vector2(-3, 0)
-end_position = Vector2(16, 0)
+end_position = Vector2(6, 0)
 
 [node name="NavigationRegion2D3" type="NavigationRegion2D" parent="Navigation" unique_id=1606965834]
 position = Vector2(52, 70)
@@ -175,6 +214,7 @@ use_edge_connections = false
 [node name="NavigationLink2D8" type="NavigationLink2D" parent="Navigation" unique_id=1101399884]
 position = Vector2(71, 72)
 bidirectional = false
+start_position = Vector2(-10, 0)
 end_position = Vector2(65, 0)
 
 [node name="NavigationLink2D9" type="NavigationLink2D" parent="Navigation" unique_id=333031336]
@@ -196,14 +236,15 @@ navigation_polygon = SubResource("NavigationPolygon_7mycd")
 use_edge_connections = false
 
 [node name="NavigationRegion2D5" type="NavigationRegion2D" parent="Navigation" unique_id=1823875361]
-position = Vector2(58, 42)
-navigation_polygon = SubResource("NavigationPolygon_7mycd")
+position = Vector2(47, 41)
+navigation_polygon = SubResource("NavigationPolygon_4c57u")
 use_edge_connections = false
 
 [node name="NavigationLink2D11" type="NavigationLink2D" parent="Navigation" unique_id=820170021]
 position = Vector2(71, 72)
 bidirectional = false
-end_position = Vector2(1, 20)
+start_position = Vector2(-10, 0)
+end_position = Vector2(-6, 17)
 
 [node name="NavigationLink2D12" type="NavigationLink2D" parent="Navigation" unique_id=1786408578]
 position = Vector2(40, 104)

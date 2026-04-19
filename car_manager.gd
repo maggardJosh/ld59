@@ -12,8 +12,15 @@ var carSpawners: Array[Node2D] = []
 var timeToNextSpawn: float = 0.0
 var carCount: int = 0
 
-	
+@export var standard_lives: int = 10
+
+var lives_left: int
 func _ready() -> void: 
+	lives_left = standard_lives
+	EventManager.lives_updated.emit(lives_left)
+	EventManager.score_updated.emit(0)
+	EventManager.car_reached_goal.connect(on_car_reached_goal)
+	EventManager.car_exploded.connect(on_car_exploded)
 	for carSpawner in carSpawnerNodeParent.get_children():
 		carSpawners.append(carSpawner)
 	timeToNextSpawn = randf_range(minCarSpawnTime, maxCarSpawnTime)
@@ -25,6 +32,15 @@ func _process(delta: float) -> void:
 	if timeToNextSpawn <= 0.0:
 		spawn_car()
 		timeToNextSpawn = randf_range(minCarSpawnTime, maxCarSpawnTime)
+
+var score: int = 0
+func on_car_reached_goal() -> void:
+	score+=100
+	EventManager.score_updated.emit(score)
+
+func on_car_exploded() -> void:
+	lives_left -= 1
+	EventManager.lives_updated.emit(lives_left)
 
 func on_car_destroyed() -> void:
 	carCount -= 1
