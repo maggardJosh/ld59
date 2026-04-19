@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dm6gq88rrr7iq" path="res://car2.png" id="2_06lh1"]
 [ext_resource type="Texture2D" uid="uid://co72rpwvd7wwi" path="res://car.png" id="2_k61xc"]
 [ext_resource type="Texture2D" uid="uid://ccwgg58ntxj1i" path="res://car3.png" id="3_td361"]
+[ext_resource type="PackedScene" uid="uid://coy1st8vmoyqt" path="res://explosion_particles.tscn" id="5_td361"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06lh1"]
 size = Vector2(20, 11)
@@ -16,7 +17,10 @@ rotation = -1.5707964
 script = ExtResource("1_uoj53")
 light_collision_mask = 16
 carTextures = Array[Texture2D]([ExtResource("2_06lh1"), ExtResource("3_td361"), ExtResource("2_k61xc")])
-minCarSpeed = 100.0
+minCarSpeed = 150.0
+maxCarSpeed = 200.0
+explosionScene = ExtResource("5_td361")
+acc = 80.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=2125234151]
 path_desired_distance = 5.0

@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://coy1st8vmoyqt"]
+
+[ext_resource type="Script" uid="uid://bku5mvkwjsrvx" path="res://explosion_particles.gd" id="1_regki"]
+
+[sub_resource type="Curve" id="Curve_tr7be"]
+_data = [Vector2(0, 0.6754001), 0.0, 2.1949525, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_regki"]
+offsets = PackedFloat32Array(0, 0.32, 1)
+colors = PackedColorArray(0.21321815, 0.13454372, 0.062162638, 1, 0.85, 0.75820005, 0.646, 1, 0.18424639, 0.10927092, 0.04127392, 1)
+
+[node name="ExplosionParticles" type="CPUParticles2D" unique_id=377241776]
+emitting = false
+amount = 50
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.94
+randomness = 0.14
+emission_shape = 3
+emission_rect_extents = Vector2(5, 5)
+direction = Vector2(0, -1)
+spread = 89.68
+gravity = Vector2(0, 150)
+initial_velocity_min = 64.33
+initial_velocity_max = 235.27
+angular_velocity_min = -50.53
+angular_velocity_max = 50.53
+radial_accel_min = -24.8
+radial_accel_max = 30.1
+scale_amount_min = 0.0
+scale_amount_max = 6.0
+scale_amount_curve = SubResource("Curve_tr7be")
+color = Color(0.83, 0.7553, 0.6806, 1)
+color_ramp = SubResource("Gradient_regki")
+script = ExtResource("1_regki")
