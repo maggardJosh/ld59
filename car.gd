@@ -13,6 +13,7 @@ extends Node2D
 @export var carStartIdleWarningTime: float = 15
 
 @export var explosionScene: PackedScene
+@export var score_ind: PackedScene
 
 @onready var sprite = $Sprite2D
 var next_light_enabled = true
@@ -66,6 +67,9 @@ func _physics_process(delta: float) -> void:
 	if NavigationServer2D.map_get_iteration_id(navAgent.get_navigation_map()) == 0:
 		return
 	if navAgent.is_navigation_finished():
+		var score_indicator = score_ind.instantiate()
+		get_tree().root.add_child(score_indicator)
+		score_indicator.global_position = self.global_position + Vector2(randf_range(-10, 10), randf_range(-10, 10))
 		EventManager.car_reached_goal.emit()
 		self.queue_free()
 		return
