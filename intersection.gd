@@ -11,6 +11,7 @@ extends Node2D
 @export var left_light_exists: bool = true
 
 func _ready():
+	return
 	top_light.visible = top_light_exists
 	right_light.visible = right_light_exists
 	bottom_light.visible = bottom_light_exists

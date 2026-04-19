@@ -4,8 +4,10 @@
 [ext_resource type="SpriteFrames" uid="uid://be2b38w4moay2" path="res://stoplight.aseprite" id="1_p2d6a"]
 [ext_resource type="Script" uid="uid://b5dwtrkbh31h7" path="res://stoplightParent.gd" id="2_0mcfx"]
 [ext_resource type="Script" uid="uid://csbdbfoon057" path="res://stoplight.gd" id="3_0mcfx"]
+[ext_resource type="Shape2D" uid="uid://b80sv2tn4orfl" path="res://streetLightMouseCollisionPolygon.tres" id="5_w7lpe"]
 [ext_resource type="AudioStream" uid="uid://dsj1i4d43guk6" path="res://audio/lightBlip.wav" id="5_xauj5"]
 [ext_resource type="Script" uid="uid://bxkwt6mt1ny1b" path="res://audioplayerhelper.gd" id="6_tx3dh"]
+[ext_resource type="SpriteFrames" uid="uid://c60812nxc0tqi" path="res://centerStoplight.aseprite" id="7_tx3dh"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kek77"]
 vertices = PackedVector2Array(-6, 20, -8, 20, -8, 15, -6, 15)
@@ -22,9 +24,6 @@ vertices = PackedVector2Array(-6, 20, -8, 20, -8, 16, -6, 16)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(4, 6, -18, 6, -18, 30, 4, 30)])
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qrk37"]
-size = Vector2(12, 12.500001)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0mcfx"]
 size = Vector2(12, 10.500001)
 
@@ -34,6 +33,8 @@ top_light = NodePath("Light/topLight")
 right_light = NodePath("Light/rightLight")
 bottom_light = NodePath("Light/bottomLight")
 left_light = NodePath("Light/leftLight")
+metadata/_edit_horizontal_guides_ = [-16.0, 16.0]
+metadata/_edit_vertical_guides_ = [-16.0, 16.0]
 
 [node name="Navigation" type="Node2D" parent="." unique_id=330763979]
 
@@ -258,15 +259,16 @@ bidirectional = false
 end_position = Vector2(5, -10.000001)
 
 [node name="Light" type="Node2D" parent="." unique_id=835479889]
-rotation = -1.5707964
 script = ExtResource("2_0mcfx")
 
 [node name="rightLight" type="AnimatedSprite2D" parent="Light" unique_id=1762509038]
+self_modulate = Color(1, 1, 1, 0)
 position = Vector2(7.999999, 11)
 rotation = -3.1415925
 sprite_frames = ExtResource("1_p2d6a")
 frame = 1
 script = ExtResource("3_0mcfx")
+stoplightFrameIndex = 4
 
 [node name="Area2D2" type="Area2D" parent="Light/rightLight" unique_id=2066160222]
 position = Vector2(9.536743e-07, 3.5762787e-07)
@@ -274,8 +276,8 @@ collision_layer = 32768
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Light/rightLight/Area2D2" unique_id=872403630]
-position = Vector2(-1.3709266e-06, -9.536743e-07)
-shape = SubResource("RectangleShape2D_qrk37")
+position = Vector2(7.999998, 0.9999988)
+shape = ExtResource("5_w7lpe")
 
 [node name="CarCollision2" type="Area2D" parent="Light/rightLight" unique_id=1361873807]
 position = Vector2(-9.536743e-07, 0.99999905)
@@ -287,19 +289,21 @@ position = Vector2(-4.7683716e-07, -13.25)
 shape = SubResource("RectangleShape2D_0mcfx")
 
 [node name="bottomLight" type="AnimatedSprite2D" parent="Light" unique_id=2137331860]
+self_modulate = Color(1, 1, 1, 0)
 position = Vector2(-8.999999, 7.999999)
 rotation = -1.5707964
 sprite_frames = ExtResource("1_p2d6a")
 frame = 1
 script = ExtResource("3_0mcfx")
+stoplightFrameIndex = 3
 
 [node name="Area2D" type="Area2D" parent="Light/bottomLight" unique_id=1415243500]
 collision_layer = 32768
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Light/bottomLight/Area2D" unique_id=2107150412]
-position = Vector2(0, -1.750001)
-shape = SubResource("RectangleShape2D_qrk37")
+position = Vector2(7.999999, -2.0000005)
+shape = ExtResource("5_w7lpe")
 
 [node name="CarCollision" type="Area2D" parent="Light/bottomLight" unique_id=828441232]
 collision_layer = 16
@@ -310,18 +314,21 @@ position = Vector2(-4.7683716e-07, -13.25)
 shape = SubResource("RectangleShape2D_0mcfx")
 
 [node name="topLight" type="AnimatedSprite2D" parent="Light" unique_id=1688371107]
+self_modulate = Color(1, 1, 1, 0)
 position = Vector2(9, -7.9999995)
 rotation = 1.5707964
 sprite_frames = ExtResource("1_p2d6a")
 frame = 1
 script = ExtResource("3_0mcfx")
+stoplightFrameIndex = 1
 
 [node name="Area2D" type="Area2D" parent="Light/topLight" unique_id=1282586116]
 collision_layer = 32768
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Light/topLight/Area2D" unique_id=750828958]
-shape = SubResource("RectangleShape2D_qrk37")
+position = Vector2(7.9999995, -2)
+shape = ExtResource("5_w7lpe")
 
 [node name="CarCollision3" type="Area2D" parent="Light/topLight" unique_id=1478934235]
 collision_layer = 16
@@ -332,19 +339,21 @@ position = Vector2(-4.7683716e-07, -13.25)
 shape = SubResource("RectangleShape2D_0mcfx")
 
 [node name="leftLight" type="AnimatedSprite2D" parent="Light" unique_id=1562530098 node_paths=PackedStringArray("navArea")]
+self_modulate = Color(1, 1, 1, 0)
 position = Vector2(-7.9999995, -9)
 sprite_frames = ExtResource("1_p2d6a")
 frame = 1
 script = ExtResource("3_0mcfx")
 navArea = NodePath("../../Navigation/EntranceLeft/NavigationRegion2D10")
+stoplightFrameIndex = 2
 
 [node name="Area2D" type="Area2D" parent="Light/leftLight" unique_id=508752653]
 collision_layer = 32768
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Light/leftLight/Area2D" unique_id=1776540531]
-position = Vector2(-3.576278e-07, 0)
-shape = SubResource("RectangleShape2D_qrk37")
+position = Vector2(7.9999995, -2)
+shape = ExtResource("5_w7lpe")
 
 [node name="CarCollision4" type="Area2D" parent="Light/leftLight" unique_id=943565870]
 position = Vector2(-8.337286e-14, 1)
@@ -367,6 +376,9 @@ stream = ExtResource("5_xauj5")
 bus = &"Sfx"
 script = ExtResource("6_tx3dh")
 random_pitch_range = Vector2(0.7, 0.8)
+
+[node name="SingleLightSprite" type="AnimatedSprite2D" parent="Light" unique_id=1972666998]
+sprite_frames = ExtResource("7_tx3dh")
 
 [connection signal="input_event" from="Light/rightLight/Area2D2" to="Light/rightLight" method="_on_area_2d_input_event"]
 [connection signal="input_event" from="Light/bottomLight/Area2D" to="Light/bottomLight" method="_on_area_2d_input_event"]

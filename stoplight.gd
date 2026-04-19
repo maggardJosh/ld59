@@ -3,6 +3,7 @@ extends AnimatedSprite2D
 
 @export var navArea: NavigationRegion2D
 @export var lightEnabled: bool = false
+@export var stoplightFrameIndex: int = 0
 
 signal light_changed(light:Stoplight, enabled: bool)
 

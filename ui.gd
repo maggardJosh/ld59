@@ -12,11 +12,14 @@ func _ready():
 func _on_free_mode_changed(enabled: bool) -> void:
 	$MarginContainer/VBoxContainer/Control/Deaths.visible = not enabled
 
+var game_started: bool = false
 func _on_game_started() -> void:
+	game_started = true
 	game_time = 0
+
 var game_time: float
 func _process(delta):
-	if EventManager.demo_mode_enabled:
+	if not game_started:
 		return
 	if Input.is_action_just_pressed("ui_cancel"):
 		blipPlayer.play_random_pitch()
@@ -48,6 +51,7 @@ func lives_updated(num_lives: int) -> void:
 	animPlayer.play("pulse")
 	death_label.text = "Lives: " + str(num_lives)
 	if (not EventManager.free_mode_enabled and not EventManager.demo_mode_enabled) and num_lives <= 0:
+		game_started = false
 		$GameOver.visible = true
 		$MarginContainer.visible = false
 		$GameOver/VBoxContainer/Score.text = "Time: " + get_converted_time(int(game_time)) + "\nFinal Score: " + $MarginContainer/VBoxContainer/Control2/Score.text
@@ -101,8 +105,18 @@ func _on_continue_pressed() -> void:
 
 
 func _on_quit_pressed() -> void:
+	game_started = false
 	$Pause.visible = false
 	Engine.time_scale = 1.0
 	$Title.visible = true
 	$MarginContainer.visible = false
 	EventManager.demo_mode.emit(true)
+	EventManager.free_mode.emit(false)
+
+
+func _on_auto_pressed() -> void:
+	EventManager.free_mode.emit(false)
+	EventManager.demo_mode.emit(true)
+	EventManager.game_started.emit()
+	$Title.visible = false
+	$GameOver.visible = false
