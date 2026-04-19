@@ -11,6 +11,7 @@ extends Node2D
 var carSpawners: Array[Node2D] = []
 var timeToNextSpawn: float = 0.0
 var carCount: int = 0
+var cars: Array[Car] = []
 
 @export var standard_lives: int = 10
 
@@ -21,10 +22,19 @@ func _ready() -> void:
 	EventManager.score_updated.emit(0)
 	EventManager.car_reached_goal.connect(on_car_reached_goal)
 	EventManager.car_exploded.connect(on_car_exploded)
+	EventManager.demo_mode.connect(_on_demo_mode_changed)
 	for carSpawner in carSpawnerNodeParent.get_children():
 		carSpawners.append(carSpawner)
 	timeToNextSpawn = randf_range(minCarSpawnTime, maxCarSpawnTime)
+func _on_demo_mode_changed(enabled: bool) -> void:
+	if not enabled:
+		lives_left = standard_lives
+		EventManager.lives_updated.emit(lives_left)
+		EventManager.score_updated.emit(0)
+		for car in cars:
+			car.queue_free()
 
+		
 func _process(delta: float) -> void:
 	if carSpawners.size() == 0:
 		return
@@ -42,8 +52,9 @@ func on_car_exploded() -> void:
 	lives_left -= 1
 	EventManager.lives_updated.emit(lives_left)
 
-func on_car_destroyed() -> void:
+func on_car_destroyed(car:Car) -> void:
 	carCount -= 1
+	cars.erase(cars.find(car))
 
 func spawn_car() -> void:
 	if carCount >= maxCars:
@@ -68,8 +79,9 @@ func spawn_car() -> void:
 		var car: Car = carScene.instantiate() 
 		car.random_type()
 		spawner.add_child(car)
-		car.tree_exited.connect(on_car_destroyed)
+		car.tree_exited.connect(on_car_destroyed.bind(car))
 		car.global_position = spawner.global_position 
 		car.set_goal(goals[car.type])
+		cars.append(car)
 		carCount += 1
 		return

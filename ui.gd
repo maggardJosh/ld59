@@ -3,9 +3,15 @@ extends CanvasLayer
 func _ready():
 	EventManager.score_updated.connect(score)
 	EventManager.lives_updated.connect(lives_updated)
+	EventManager.free_mode.connect(_on_free_mode_changed)
+
+func _on_free_mode_changed(enabled: bool) -> void:
+	$MarginContainer/VBoxContainer/Deaths.visible = not enabled
 
 var game_time: float
 func _process(delta):
+	if EventManager.demo_mode_enabled:
+		return
 	game_time += delta
 	$MarginContainer/Time.text = get_converted_time(int(game_time))
 
@@ -22,3 +28,18 @@ func score(points: int) -> void:
 func lives_updated(num_lives: int) -> void:
 	var death_label = $MarginContainer/VBoxContainer/Deaths
 	death_label.text = "Lives: " + str(num_lives)
+
+
+func _on_standard_pressed() -> void:
+	EventManager.demo_mode.emit(false)
+	EventManager.free_mode.emit(false)
+	$Title.visible = false
+	$MarginContainer.visible = true
+
+
+func _on_free_pressed() -> void:
+	EventManager.demo_mode.emit(false)
+	EventManager.free_mode.emit(true)
+	$Title.visible = false
+	$MarginContainer.visible = true
+	

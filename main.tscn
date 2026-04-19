@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://bkxuwcxj1547n" path="res://garage_arrow.png" id="7_kek77"]
 [ext_resource type="Texture2D" uid="uid://b35qy0gk0deor" path="res://garage_over.png" id="8_4c57u"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_kek77"]
+font_size = 32
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5vw27"]
 vertices = PackedVector2Array(28.1875, 39.226563, 4.203125, 39.757813, 5.8125, -42, 21.757813, -42)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -48,6 +51,7 @@ script = ExtResource("1_1bvp3")
 script = ExtResource("2_kek77")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=678584713]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -76,6 +80,34 @@ text = "Lives - "
 [node name="Score" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=2013743834]
 layout_mode = 2
 text = "Score - "
+
+[node name="Title" type="PanelContainer" parent="UI" unique_id=875642968]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Title" unique_id=1112265391]
+custom_minimum_size = Vector2(300, 3.235)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="UI/Title/VBoxContainer" unique_id=325996735]
+custom_minimum_size = Vector2(0, 67.04)
+layout_mode = 2
+text = "Gridlock"
+label_settings = SubResource("LabelSettings_kek77")
+horizontal_alignment = 1
+
+[node name="Standard" type="Button" parent="UI/Title/VBoxContainer" unique_id=1136010297]
+layout_mode = 2
+text = "Standard Mode"
+
+[node name="Free" type="Button" parent="UI/Title/VBoxContainer" unique_id=1944707286]
+layout_mode = 2
+text = "Free Mode"
 
 [node name="CarManager" type="Node2D" parent="." unique_id=1353484398 node_paths=PackedStringArray("carSpawnerNodeParent", "goals")]
 script = ExtResource("3_lquwl")
@@ -509,3 +541,6 @@ z_index = 1
 position = Vector2(615, 224)
 rotation = -3.1415927
 texture = ExtResource("8_4c57u")
+
+[connection signal="pressed" from="UI/Title/VBoxContainer/Standard" to="UI" method="_on_standard_pressed"]
+[connection signal="pressed" from="UI/Title/VBoxContainer/Free" to="UI" method="_on_free_pressed"]

@@ -46,10 +46,11 @@ func explode() -> void:
 
 func _physics_process(delta: float) -> void:
 	if speed < .1:
-		idle_time += delta
-		if idle_time >= carMaxIdleTime:
-			explode()
-			return
+		if not EventManager.free_mode_enabled:
+			idle_time += delta
+			if idle_time >= carMaxIdleTime:
+				explode()
+				return
 	else:
 		idle_time = 0.0
 	
@@ -57,7 +58,7 @@ func _physics_process(delta: float) -> void:
 	var idle_danger_tValue:float = clamp((idle_time - carStartIdleWarningTime) / (carMaxIdleTime - carStartIdleWarningTime), 0, 1)
 	
 
-	var scaleX = 1.0 + randf_range(-.02, .02) + randf_range(-.4, .4) * idle_danger_tValue
+	var scaleX = 1.0 + randf_range(-.02, .02) + randf_range(-.5, .5) * idle_danger_tValue
 	var scaleY = 1.0 + randf_range(-.01, .01) + randf_range(-.3, .3) * idle_danger_tValue
 	sprite.scale = Vector2(scaleX, scaleY)
 
