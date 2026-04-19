@@ -4,8 +4,19 @@ extends Node2D
 @export var carScene: PackedScene
 @export var carSpawnerNodeParent: Node2D
 @export var goals: Array[Node2D]
-@export var minCarSpawnTime: float = 1.0
-@export var maxCarSpawnTime: float = 3.0
+
+var minCarSpawnTime: float = 1.0
+var maxCarSpawnTime: float = 3.0
+
+@export var easyMinCarSpawnTime: float = 3.0
+@export var easyMaxCarSpawnTime: float = 5.0
+@export var hardMinCarSpawnTime: float = 0.5
+@export var hardMaxCarSpawnTime: float = 1.5
+
+@export var difficultyCurveTime: float = 60
+@export var difficultyCurve: Curve
+
+
 @export_flags_2d_physics var carCollisionMask: int
 
 var carSpawners: Array[Node2D] = []
@@ -22,25 +33,36 @@ func _ready() -> void:
 	EventManager.score_updated.emit(0)
 	EventManager.car_reached_goal.connect(on_car_reached_goal)
 	EventManager.car_exploded.connect(on_car_exploded)
-	EventManager.demo_mode.connect(_on_demo_mode_changed)
+	EventManager.game_started.connect(_on_game_started)
 	for carSpawner in carSpawnerNodeParent.get_children():
 		carSpawners.append(carSpawner)
+	update_difficulty()
 	timeToNextSpawn = randf_range(minCarSpawnTime, maxCarSpawnTime)
-func _on_demo_mode_changed(enabled: bool) -> void:
-	if not enabled:
-		lives_left = standard_lives
-		EventManager.lives_updated.emit(lives_left)
-		EventManager.score_updated.emit(0)
-		for car in cars:
-			car.queue_free()
 
+func _on_game_started() -> void:
+	elapsed_time = 0
+	lives_left = standard_lives
+	EventManager.lives_updated.emit(lives_left)
+	EventManager.score_updated.emit(0)
+	for car in cars:
+		car.queue_free()
 		
+
+func update_difficulty() -> void:
+	var difficulty_tValue: float = difficultyCurve.sample(clamp(elapsed_time / difficultyCurveTime, 0, 1))
+	minCarSpawnTime = easyMinCarSpawnTime + (hardMinCarSpawnTime - easyMinCarSpawnTime) * difficulty_tValue
+	maxCarSpawnTime = easyMaxCarSpawnTime + (hardMaxCarSpawnTime - easyMaxCarSpawnTime) * difficulty_tValue
+	print("Difficulty: " + str(difficulty_tValue) + " Spawn Time Range: " + str(minCarSpawnTime) + " - " + str(maxCarSpawnTime))
+
+var elapsed_time: float = 0.0
 func _process(delta: float) -> void:
 	if carSpawners.size() == 0:
 		return
+	elapsed_time += delta
 	timeToNextSpawn -= delta
 	if timeToNextSpawn <= 0.0:
 		spawn_car()
+		update_difficulty()
 		timeToNextSpawn = randf_range(minCarSpawnTime, maxCarSpawnTime)
 
 var score: int = 0
@@ -54,7 +76,7 @@ func on_car_exploded() -> void:
 
 func on_car_destroyed(car:Car) -> void:
 	carCount -= 1
-	cars.erase(cars.find(car))
+	cars.remove_at(cars.find(car))
 
 func spawn_car() -> void:
 	if carCount >= maxCars:

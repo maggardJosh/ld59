@@ -6,6 +6,7 @@ signal score_updated(points: int)
 signal lives_updated(num_lives: int)
 signal demo_mode(enabled: bool)
 signal free_mode(enabled: bool)
+signal game_started()
 
 var demo_mode_enabled: bool = false
 var free_mode_enabled: bool = false
