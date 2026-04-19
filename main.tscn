@@ -10,6 +10,126 @@
 [ext_resource type="Texture2D" uid="uid://bkxuwcxj1547n" path="res://garage_arrow.png" id="7_kek77"]
 [ext_resource type="Texture2D" uid="uid://b35qy0gk0deor" path="res://garage_over.png" id="8_4c57u"]
 
+[sub_resource type="Animation" id="Animation_kek77"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4c57u"]
+resource_name = "pulse"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.43333334),
+"transitions": PackedFloat32Array(2.7320802, 1),
+"update": 0,
+"values": [Vector2(0.8, 0.8), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.43333334),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(0.73, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_efxa6"]
+_data = {
+&"RESET": SubResource("Animation_kek77"),
+&"pulse": SubResource("Animation_4c57u")
+}
+
+[sub_resource type="Animation" id="Animation_efxa6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dg77c"]
+resource_name = "pulse"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1.4142134, 1),
+"update": 0,
+"values": [Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2.070531, 1),
+"update": 0,
+"values": [Color(0.30952004, 0.73, 0.2628, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ycdy4"]
+_data = {
+&"RESET": SubResource("Animation_efxa6"),
+&"pulse": SubResource("Animation_dg77c")
+}
+
 [sub_resource type="LabelSettings" id="LabelSettings_kek77"]
 font_size = 32
 
@@ -57,7 +177,6 @@ script = ExtResource("1_1bvp3")
 script = ExtResource("2_kek77")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=678584713]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -79,13 +198,39 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="Deaths" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=735355571]
+[node name="Control" type="Control" parent="UI/MarginContainer/VBoxContainer" unique_id=164328956]
+custom_minimum_size = Vector2(0, 29.985)
 layout_mode = 2
+
+[node name="Deaths" type="Label" parent="UI/MarginContainer/VBoxContainer/Control" unique_id=735355571]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 53.0
+offset_bottom = 27.0
+pivot_offset_ratio = Vector2(0, 0.5)
+size_flags_horizontal = 0
 text = "Lives - "
 
-[node name="Score" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=2013743834]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/MarginContainer/VBoxContainer/Control/Deaths" unique_id=662086241]
+libraries/ = SubResource("AnimationLibrary_efxa6")
+
+[node name="Control2" type="Control" parent="UI/MarginContainer/VBoxContainer" unique_id=334485007]
+custom_minimum_size = Vector2(0, 22.01)
 layout_mode = 2
+
+[node name="Score" type="Label" parent="UI/MarginContainer/VBoxContainer/Control2" unique_id=2013743834]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 57.0
+offset_bottom = 11.5
+grow_vertical = 2
 text = "Score - "
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/MarginContainer/VBoxContainer/Control2/Score" unique_id=1640694185]
+libraries/ = SubResource("AnimationLibrary_ycdy4")
 
 [node name="GameOver" type="PanelContainer" parent="UI" unique_id=550497547]
 visible = false

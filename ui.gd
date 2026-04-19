@@ -7,7 +7,7 @@ func _ready():
 	EventManager.game_started.connect(_on_game_started)
 
 func _on_free_mode_changed(enabled: bool) -> void:
-	$MarginContainer/VBoxContainer/Deaths.visible = not enabled
+	$MarginContainer/VBoxContainer/Control/Deaths.visible = not enabled
 
 func _on_game_started() -> void:
 	game_time = 0
@@ -25,11 +25,17 @@ func get_converted_time(time: int) -> String:
 	return time_string
 
 func score(points: int) -> void:
-	var score_label = $MarginContainer/VBoxContainer/Score
+	var score_label = $MarginContainer/VBoxContainer/Control2/Score
+	var animPlayer = $MarginContainer/VBoxContainer/Control2/Score/AnimationPlayer
+	animPlayer.stop()
+	animPlayer.play("pulse")
 	score_label.text = "Score: " + str(points)
 
 func lives_updated(num_lives: int) -> void:
-	var death_label = $MarginContainer/VBoxContainer/Deaths
+	var death_label = $MarginContainer/VBoxContainer/Control/Deaths
+	var animPlayer = $MarginContainer/VBoxContainer/Control/Deaths/AnimationPlayer
+	animPlayer.stop()
+	animPlayer.play("pulse")
 	death_label.text = "Lives: " + str(num_lives)
 	if (not EventManager.free_mode_enabled and not EventManager.demo_mode_enabled) and num_lives <= 0:
 		$GameOver.visible = true
